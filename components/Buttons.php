@@ -9,41 +9,110 @@ class Buttons extends ComponentBase
     {
         return [
             'name'        => 'Yandex Share',
-            'description' => 'Yandex social share buttons'
+            'description' => 'Social share buttons'
         ];
     }
 
     public function defineProperties()
     {
         return [
+            'access_token' => [
+                'title'       => 'Access token',
+                'default'     => '',
+                'type'        => 'string',
+                'description' => 'A token for removing the restriction of requests to receive a counter. Actual and works only for Facebook',
+                'group'       => 'Options'
+            ],
+            'bare' => [
+                'title'       => 'Disable styles',
+                'default'     => '0',
+                'type'        => 'checkbox',
+                'description' => 'A sign that loading styles is disabled. If you add an attribute, social networks will be displayed as a text vertical list',
+                'group'       => 'Options'
+            ],
             'counter' => [
-                'title'   => 'Show counter',
-                'default' => '0',
-                'type'    => 'checkbox',
+                'title'       => 'Show counter',
+                'default'     => '0',
+                'type'        => 'checkbox',
+                'description' => 'A sign that the publications counter is displayed on the button social network',
+                'group'       => 'Options'
+            ],
+            'copy' => [
+                'title'   => 'Copy button position',
+                'type'    => 'dropdown',
+                'options' => [
+                    'first'  => 'First',
+                    'last'   => 'Last',
+                    'hidden' => 'Hidden'
+                ],
+                'default'     => 'last',
+                'description' => '"Copy" button position. The "Copy link" button can be displayed if you use the limit parameter',
+                'group'       => 'Options'
+            ],
+            'description' => [
+                'title'       => 'Description text',
+                'default'     => '',
+                'type'        => 'text',
+                'description' => 'Text to share',
                 'group'   => 'Options'
             ],
-            'size' => [
-                'title'   => 'Buttons size',
-                'default' => '24px',
-                'type'    => 'string',
+            'direction' => [
+                'title'   => 'Direction',
+                'type'    => 'dropdown',
+                'options' => [
+                    'horizontal' => 'Horizontal',
+                    'vertical'   => 'Vertical'
+                ],
+                'default'     => 'horizontal',
+                'description' => 'Direction of the list of buttons',
+                'group'       => 'Options'
+            ],
+            'hashtags' => [
+                'title'       => 'Hashtags',
+                'default'     => '',
+                'type'        => 'text',
+                'description' => 'Relevant and work only for Twitter. The string is indicated without the # sign. Several hashtags are specified comma-delimited, without a space',
                 'group'   => 'Options'
             ],
-            'border_radius' => [
-                'title'   => 'Buttons border radius',
-                'default' => '0%',
-                'type'    => 'string',
-                'group'   => 'Options'
-            ],
-            'pinterest_image' => [
-                'title'       => 'Pinterest image',
+            'image' => [
+                'title'       => 'Image',
                 'default'     => '',
                 'type'        => 'string',
                 'placeholder' => 'https://site.com/image.jpg',
+                'description' => 'Image to share',
+                'group'       => 'Options'
+            ],
+            'popup_direction' => [
+                'title'   => 'Popup direction',
+                'type'    => 'dropdown',
+                'options' => [
+                    'bottom' => 'Bottom',
+                    'top' => 'Top'
+                ],
+                'default' => 'bottom',
+                'description' => 'Opening direction of the pop-up',
+                'group'   => 'Options'
+            ],
+            'popup_position' => [
+                'title'   => 'Popup position',
+                'type'    => 'dropdown',
+                'options' => [
+                    'inner' => 'Inner',
+                    'outer' => 'Outer'
+                ],
+                'default'     => 'inner',
+                'description' => 'The location of the pop-up relative to the block container. The value of outer can be needed if, due to the specificity of the layout of your site, pop-up is cropped by neighboring page elements',
+                'group'       => 'Options'
+            ],
+            'limit' => [
+                'title'       => 'Limit',
+                'default'     => '',
+                'type'        => 'string',
+                'description' => 'Number of social networks displayed as buttons. It is used if you need to integrate many social networks into the block, and also that the block occupies little space on the page. Those not included in the social network limit will be displayed in pop-up at the click of a button',
                 'group'       => 'Options'
             ],
             'lang' => [
                 'title'   => 'Language',
-                'default' => '0',
                 'type'    => 'dropdown',
                 'options' => [
                     'hy' => 'Armenian',
@@ -58,9 +127,37 @@ class Buttons extends ComponentBase
                     'tr' => 'Turkish',
                     'uk' => 'Ukrainian',
                 ],
-                'default' => 'en',
-                'group'   => 'Options'
+                'default'     => 'en',
+                'description' => 'Block language. The signatures of the social networks buttons are localized and the "Copy link" button',
+                'group'       => 'Options'
             ],
+            'size' => [
+                'title'       => 'Buttons size',
+                'type'        => 'dropdown',
+                'options' => [
+                    's' => 'Small',
+                    'm' => 'Medium'
+                ],
+                'default'     => 'm',
+                'description' => 'Size of social network buttons',
+                'group'       => 'Options'
+            ],
+            'title' => [
+                'title'       => 'Title',
+                'default'     => '',
+                'type'        => 'text',
+                'description' => 'Headline to share',
+                'group'       => 'Options'
+            ],
+            'url' => [
+                'title'       => 'URL',
+                'default'     => '',
+                'type'        => 'string',
+                'description' => 'Link to share',
+                'group'       => 'Options'
+            ],
+
+            // Services
             'collections' => [
                 'title'   => 'Yandex Collections',
                 'default' => '0',
@@ -68,7 +165,7 @@ class Buttons extends ComponentBase
                 'group'   => 'Services'
             ],
             'vkontakte' => [
-                'title'   => 'Vk',
+                'title'   => 'Vk (vkontakte)',
                 'default' => '0',
                 'type'    => 'checkbox',
                 'group'   => 'Services'
@@ -80,7 +177,7 @@ class Buttons extends ComponentBase
                 'group'   => 'Services'
             ],
             'odnoklassniki' => [
-                'title'   => 'Ok',
+                'title'   => 'Ok (odnoklassniki)',
                 'default' => '0',
                 'type'    => 'checkbox',
                 'group'   => 'Services'
